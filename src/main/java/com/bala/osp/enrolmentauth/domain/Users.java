@@ -2,11 +2,12 @@ package com.bala.osp.enrolmentauth.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
 
 import com.bala.osp.enrolmentauth.enums.Roles;
 
@@ -23,6 +24,10 @@ public class Users {
 	private String emailId;
 	private Long mobileNumber;
 	private Roles role;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Address billingAddress;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Address shippingAddress;
 
 	public int getId() {
 		return id;
@@ -86,6 +91,22 @@ public class Users {
 
 	public void setRole(Roles role) {
 		this.role = role;
+	}
+
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public Address getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
 }

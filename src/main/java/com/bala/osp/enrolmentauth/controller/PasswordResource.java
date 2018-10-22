@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bala.osp.enrolmentauth.domain.Users;
 import com.bala.osp.enrolmentauth.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -22,8 +23,8 @@ public class PasswordResource {
 	
 	@ApiOperation("Update Password")
 	@PutMapping("/user/{emailId}")
-	public void updatePassword(@RequestBody String password, @PathVariable("enmailId") String emailId) {
-		this.userService.updatePassword(password, emailId);
+	public Users updatePassword(@RequestBody String password, @PathVariable("enmailId") String emailId) {
+		return this.userService.updatePassword(password, emailId);
 	}
 
 }
