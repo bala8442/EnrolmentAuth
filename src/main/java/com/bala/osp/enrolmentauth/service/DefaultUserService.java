@@ -18,12 +18,12 @@ public class DefaultUserService implements UserService{
 	private UserRepository userRepository;
 	
 	@Override
-	public boolean authenticateUser(String emailId, String password) {
+	public Users authenticateUser(String emailId, String password) {
 		Users user = getUserByEmailId(emailId);
 		if(user.getPassword().equals(password)) {
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 	}
 
 	@Override
@@ -60,6 +60,11 @@ public class DefaultUserService implements UserService{
 		user.setShippingAddress(address);
 		this.userRepository.save(user);
 		return user;
+	}
+
+	@Override
+	public Users getUser(String emailId) {
+		return this.userRepository.findByEmailId(emailId);
 	}
 
 }

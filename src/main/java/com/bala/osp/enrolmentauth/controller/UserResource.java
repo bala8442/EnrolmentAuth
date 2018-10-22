@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +25,21 @@ public class UserResource {
 	private UserService userService;
 
 	@ApiOperation("Authenticate users")
-	@GetMapping("/admin/login/{emailId}")
-	public String validateAdminLogin(@RequestBody String password, @PathVariable("emailId") String emailId) {
-		if(this.userService.authenticateUser(emailId, password)) {
-			return "SUCCESS";
-		}else {
-			return "Failure";
-		}
+	@PostMapping("/admin/login/{emailId}")
+	public Users validateAdminLogin(@RequestBody String password, @PathVariable("emailId") String emailId) {
+		return this.userService.authenticateUser(emailId, password);
+	}
+	
+	@ApiOperation("Authenticate users")
+	@PostMapping("/buyer/login/{emailId}")
+	public Users validateBuyerLogin(@RequestBody String password, @PathVariable("emailId") String emailId) {
+		return this.userService.authenticateUser(emailId, password);
+	}
+	
+	@ApiOperation("Authenticate users")
+	@GetMapping("/users/{emailId}")
+	public Users getUSerDetails(@PathVariable("emailId") String emailId) {
+		return this.userService.getUser(emailId);
 	}
 	
 	@ApiOperation("Update Billing Address")

@@ -5,11 +5,13 @@ import com.bala.osp.enrolmentauth.domain.Users;
 
 public interface UserService {
 
-	boolean authenticateUser(String emailId, String password);
+	Users authenticateUser(String emailId, String password);
 	
 	Users updatePassword(String password, String emailId);
 	
 	Users updateBillingAddress(String emailId, Address address);
 	
 	Users updateShippingAddress(String emailId, Address address);
+	
+	Users getUser(String emailId);
 }
